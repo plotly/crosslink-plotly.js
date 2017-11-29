@@ -11,20 +11,9 @@ export default {
     buble({
       objectAssign: 'Object.assign'
     }),
-    uglify(),
-    nodeResolve({
-      jsnext: true,
-      browser: true
-    }),
-    commonjs({
-      include: 'node_modules/crossfilter',
-      namedExports: {
-        // left-hand side can be an absolute path, a path
-        // relative to the current directory, or the name
-        // of a module in node_modules
-        'node_modules/crossfilter': ['default']
-      }
-    })
+//    uglify(),
+    nodeResolve(),
+    commonjs()
   ],
   output: {
     file: 'dist/crosslink-plotly.min.js',
