@@ -1,8 +1,8 @@
 import {map, clone, values, range, toPairs} from 'ramda';
 import {walkObject, makeAttrSetterPath} from './utils/objectUtils';
-import * as crossfilter from 'crossfilter/crossfilter';
+import {crossfilter} from 'crossfilter2/src/crossfilter';
 
-const cf = crossfilter;
+const cf = crossfilter2;
 
 const CROSSFILTER_WHITELISTED_PLOTS = [
   'bar',

@@ -8,12 +8,21 @@ export default {
   external: [],
   name: 'crosslink-plotly.js',
   plugins: [
-    buble({
-      objectAssign: 'Object.assign'
-    }),
 //    uglify(),
     nodeResolve(),
-    commonjs()
+    commonjs({
+      include: 'node_moduless/**',
+     namedExports: {
+        // left-hand side can be an absolute path, a path
+        // relative to the current directory, or the name
+        // of a module in node_modules
+        'node_modules/crossfilter2/src/crossfilter.js': ['crossfilter']
+      }
+    }),
+    buble({
+//      objectAssign: 'Object.assign'
+    })
+
   ],
   output: {
     file: 'dist/crosslink-plotly.min.js',
