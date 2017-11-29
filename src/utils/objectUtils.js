@@ -1,6 +1,5 @@
 import {__, all, apply, keys, max, prop, reduce, zip} from 'ramda';
-
-export const isPlainObject = require('is-plain-object');
+import isPlainObject from 'is-plain-obj';
 
 const strictEqual = (a, b) => a === b;
 
