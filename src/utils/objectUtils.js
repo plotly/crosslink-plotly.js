@@ -11,8 +11,8 @@ const strictEqual = (a, b) => a === b;
  */
 export function align(data) {
     const maxLength = reduce(max, 0, data.map(array => array.length));
-    for (const item of data) {
-        item.length = maxLength;
+    for (let i = 0; i < data.length; i++) {
+        data[i].length = maxLength;
     }
     return data;
 }

@@ -1,0 +1,15 @@
+node_modules
+
+npm-debug.log*
+*.sublime*
+
+.*
+!.gitignore
+!.gitattributes
+!.npmignore
+!.eslintrc
+!.eslintignore
+
+!example/dist
+
+package-lock.json*
