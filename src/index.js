@@ -1,6 +1,6 @@
 import {map, clone, values, range, toPairs} from 'ramda';
 import {walkObject, makeAttrSetterPath} from './utils/objectUtils';
-import * as crossfilter from 'crossfilter';
+import * as crossfilter from 'crossfilter/crossfilter';
 
 const cf = crossfilter;
 
