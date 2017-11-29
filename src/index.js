@@ -197,7 +197,7 @@ const persistCrossfilter = (plotEl, crossfilter) => {
   plotEl._crossfilter = crossfilter;
 };
 
-export const restylePlots = (Plotly, crossfilter, plotArray) => {
+const restylePlots = (Plotly, crossfilter, plotArray) => {
 
   const someConstrained = crossfilter.plotDimensions.concat(crossfilter.formDimensions).some(dim => dim.constrained);
   const newSet = someConstrained ? crossfilter.recordDimension.top(Infinity).sort((a, b) => a.index - b.index) : [];
@@ -239,13 +239,47 @@ export const restylePlots = (Plotly, crossfilter, plotArray) => {
   });
 };
 
-export const resetAllFilters =
-               crossfilter => crossfilter.plotDimensions.concat(crossfilter.formDimensions).forEach(dim => {
-                 dim.constrained = false;
-                 if (dim.cfDimension) {
-                   dim.cfDimension.filter(null);
-                 }
-               });
+const resetAllFilters =
+        crossfilter => crossfilter.plotDimensions.concat(crossfilter.formDimensions).forEach(dim => {
+          dim.constrained = false;
+          if (dim.cfDimension) {
+            dim.cfDimension.filter(null);
+          }
+        });
+
+export const resetCrossfilter = Plotly => {
+  const plots = getPlotArray(document);
+  const crossfilter = plots[0]._crossfilter;
+  resetAllFilters(crossfilter);
+  restylePlots(Plotly, crossfilter, [...plots].filter(gd => gd.includedInCrossfilter));
+};
+
+export const specFilter = (Plotly, spec) => {
+  const plots = getPlotArray(document);
+  const gridColumn = spec.gridColumn;
+  const value = spec.isNaN ? spec.value : Number(spec.value);
+  const relation = spec.operator;
+  const crossfilter = plots[0]._crossfilter;
+  const dim = crossfilter.formDimensions[0];
+  dim.constrained = true;
+  if (dim.cfDimension) {
+    dim.cfDimension.filter(null);
+    dim.cfDimension.dispose();
+    dim.cfDimension = null;
+    dim.constrained = false;
+  }
+  dim.cfDimension = crossfilter.cf.dimension(d => d[gridColumn]);
+  const filterFunctionMap = {
+    '>': d => d > value,
+    '<': d => d < value,
+    '==': d => d === value
+  };
+  const filterFunction = filterFunctionMap[relation];
+  dim.cfDimension.filterFunction(filterFunction);
+  dim.constrained = true;
+
+  restylePlots(Plotly, crossfilter, [...plots].filter(gd => gd.includedInCrossfilter));
+}
 
 const selectionHandler = (Plotly, gd, inputEventData) => {
   // the crossfilter object is attached to the `gd` but shared among all `gd`s of a dashboard
