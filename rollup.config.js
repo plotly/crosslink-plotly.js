@@ -18,6 +18,6 @@ export default {
   ],
   output: {
     file: 'dist/crosslink-plotly.min.js',
-    format: 'es'
+    format: 'umd'
   }
 };
