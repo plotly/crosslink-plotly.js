@@ -25,12 +25,13 @@
     "crossfilter2": "^1.4.3",
     "is-plain-obj": "^1.1.0",
     "ramda": "^0.25.0",
+    "rollup-plugin-buble": "^0.18.0",
     "rollup-plugin-commonjs": "^8.2.6"
   },
   "devDependencies": {
     "buble": "^0.18.0",
-    "rollup": "^0.52.0",
-    "rollup-plugin-buble": "^0.18.0",
+    "rollup": "^0.51.8",
+    "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-uglify": "^2.0.1",
     "snazzy": "^7.0.0",
