@@ -10,15 +10,7 @@ export default {
   plugins: [
 //    uglify(),
     nodeResolve(),
-    commonjs({
-      include: 'node_modules/**',
-     namedExports: {
-        // left-hand side can be an absolute path, a path
-        // relative to the current directory, or the name
-        // of a module in node_modules
-        // 'node_modules/crossfilter2/src/crossfilter.js': ['default']
-      }
-    }),
+    commonjs(),
     buble({
       objectAssign: 'Object.assign'
     })
