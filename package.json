@@ -1,0 +1,34 @@
+{
+  "name": "crosslink-plotly.js",
+  "version": "0.0.1",
+  "description": "Links a set of `plotly.js` plots via data mapping and crossfiltering",
+  "repository": "https://github.com/plotly/crosslink-plotly.js",
+  "license": "MIT",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "standard | snazzy",
+    "lint": "standard --fix"
+  },
+  "author": "Plotly, Inc.",
+  "keywords": [
+    "crossfilter",
+    "crosslink",
+    "dashboard",
+    "graphing",
+    "plotly",
+    "plotting",
+    "visualization"
+  ],
+  "dependencies": {
+    "crossfilter": "^1.3.12",
+    "is-plain-obj": "^1.1.0",
+    "ramda": "^0.25.0"
+  },
+  "devDependencies": {
+    "snazzy": "^7.0.0",
+    "standard": "^10.0.3"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
