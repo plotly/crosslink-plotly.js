@@ -11,16 +11,16 @@ export default {
 //    uglify(),
     nodeResolve(),
     commonjs({
-      include: 'node_moduless/**',
+      include: 'node_modules/**',
      namedExports: {
         // left-hand side can be an absolute path, a path
         // relative to the current directory, or the name
         // of a module in node_modules
-        'node_modules/crossfilter2/src/crossfilter.js': ['crossfilter']
+        // 'node_modules/crossfilter2/src/crossfilter.js': ['default']
       }
     }),
     buble({
-//      objectAssign: 'Object.assign'
+      objectAssign: 'Object.assign'
     })
 
   ],
