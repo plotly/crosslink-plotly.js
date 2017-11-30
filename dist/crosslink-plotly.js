@@ -1,6 +1,8 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+	typeof define === 'function' && define.amd ? define(['exports'], factory) :
+	(factory((global['crosslink-plotly'] = global['crosslink-plotly'] || {}, global['crosslink-plotly'].js = {})));
+}(this, (function (exports) { 'use strict';
 
 function _isPlaceholder(a) {
        return a != null && typeof a === 'object' && a['@@functional/placeholder'] === true;
@@ -5525,3 +5527,7 @@ exports.cfLayoutOverrides = cfLayoutOverrides;
 exports.resetCrossfilter = resetCrossfilter;
 exports.specFilter = specFilter;
 exports.cfPlotSetup = cfPlotSetup;
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+})));

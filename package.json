@@ -4,7 +4,8 @@
   "description": "Links a set of `plotly.js` plots via data mapping and crossfiltering",
   "repository": "https://github.com/plotly/crosslink-plotly.js",
   "license": "MIT",
-  "main": "lib/crosslink-plotly.js",
+  "main": "lib/index.js",
+  "module": "es/index.js",
   "scripts": {
     "clean": "rimraf lib",
     "build": "rollup -c",
@@ -24,6 +25,8 @@
   ],
   "files": [
     "lib",
+    "es",
+    "dist",
     "src"
   ],
   "dependencies": {
@@ -33,6 +36,7 @@
   },
   "devDependencies": {
     "rimraf": "^2.6.2",
+    "rollup": "^0.52.0",
     "rollup-plugin-buble": "^0.18.0",
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-node-resolve": "^3.0.0",
