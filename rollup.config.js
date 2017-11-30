@@ -14,27 +14,11 @@ export default [
       buble({
         objectAssign: 'Object.assign'
       }),
-      uglify()
+      //uglify()
     ],
     output: {
-      file: 'dist/crosslink-plotly.min.js',
-      format: 'umd'
-    }
-  },
-  {
-    input: 'src/index.js',
-    external: [],
-    name: 'crosslink-plotly.js',
-    plugins: [
-      nodeResolve(),
-      commonjs(),
-      buble({
-        objectAssign: 'Object.assign'
-      })
-    ],
-    output: {
-      file: 'dist/crosslink-plotly.esm.js',
-      format: 'es'
+      file: 'lib/crosslink-plotly.js',
+      format: 'cjs'
     }
   }
 ];
