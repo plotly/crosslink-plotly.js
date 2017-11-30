@@ -14,10 +14,10 @@ export default [
       buble({
         objectAssign: 'Object.assign'
       }),
-      uglify()
+      //uglify()
     ],
     output: {
-      file: 'lib/crosslink-plotly.min.js',
+      file: 'lib/crosslink-plotly.js',
       format: 'cjs'
     }
   }

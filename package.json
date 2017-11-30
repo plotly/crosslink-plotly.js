@@ -4,7 +4,7 @@
   "description": "Links a set of `plotly.js` plots via data mapping and crossfiltering",
   "repository": "https://github.com/plotly/crosslink-plotly.js",
   "license": "MIT",
-  "main": "lib/crosslink-plotly.min.js",
+  "main": "lib/crosslink-plotly.js",
   "scripts": {
     "clean": "rimraf lib",
     "build": "rollup -c",
