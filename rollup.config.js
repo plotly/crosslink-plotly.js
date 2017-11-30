@@ -3,21 +3,41 @@ import buble from 'rollup-plugin-buble';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 
-export default {
-  input: 'src/index.js',
-  external: [],
-  name: 'crosslink-plotly.js',
-  plugins: [
+export default [
+  {
+    input: 'src/index.js',
+    external: [],
+    name: 'crosslink-plotly.js',
+    plugins: [
 //    uglify(),
-    nodeResolve(),
-    commonjs(),
-    buble({
-      objectAssign: 'Object.assign'
-    })
+      nodeResolve(),
+      commonjs(),
+      buble({
+        objectAssign: 'Object.assign'
+      })
 
-  ],
-  output: {
-    file: 'dist/crosslink-plotly.min.js',
-    format: 'umd'
+    ],
+    output: {
+      file: 'dist/crosslink-plotly.min.js',
+      format: 'umd'
+    }
+  },
+  {
+    input: 'src/index.js',
+    external: [],
+    name: 'crosslink-plotly.js',
+    plugins: [
+//    uglify(),
+      nodeResolve(),
+      commonjs(),
+      buble({
+        objectAssign: 'Object.assign'
+      })
+
+    ],
+    output: {
+      file: 'dist/crosslink-plotly.esm.min.js',
+      format: 'es'
+    }
   }
-};
+];
