@@ -6,7 +6,7 @@
   "license": "MIT",
   "main": "dist/crosslink-plotly.min.js",
   "scripts": {
-    "build": "rollup -c",
+    "build": "browserify src/index.js -t [ babelify --presets [ env ] ] | uglifyjs -m -c warnings=false > dist/crosslink-plotly.min.js",
     "lint": "standard --fix",
     "test": "standard | snazzy"
   },
@@ -26,16 +26,22 @@
     "is-plain-obj": "^1.1.0",
     "ramda": "^0.25.0",
     "rollup-plugin-buble": "^0.18.0",
-    "rollup-plugin-commonjs": "^8.2.6"
+    "rollup-plugin-commonjs": "^8.2.6",
+    "uglifyify": "^4.0.5"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babelify": "^8.0.0",
+    "browserify": "^14.5.0",
     "buble": "^0.18.0",
     "rollup": "^0.51.8",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-uglify": "^2.0.1",
     "snazzy": "^7.0.0",
-    "standard": "^10.0.3"
+    "standard": "^10.0.3",
+    "uglify-js": "^3.2.0"
   },
   "engines": {
     "node": ">=8.0.0"
