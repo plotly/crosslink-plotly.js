@@ -1,5 +1,5 @@
 import buble from 'rollup-plugin-buble';
-// import uglify from 'rollup-plugin-uglify';
+import uglify from 'rollup-plugin-uglify';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 
@@ -9,13 +9,12 @@ export default [
     external: [],
     name: 'crosslink-plotly.js',
     plugins: [
-//    uglify(),
       nodeResolve(),
       commonjs(),
       buble({
         objectAssign: 'Object.assign'
-      })
-
+      }),
+      uglify()
     ],
     output: {
       file: 'dist/crosslink-plotly.min.js',
@@ -27,16 +26,14 @@ export default [
     external: [],
     name: 'crosslink-plotly.js',
     plugins: [
-//    uglify(),
       nodeResolve(),
       commonjs(),
       buble({
         objectAssign: 'Object.assign'
       })
-
     ],
     output: {
-      file: 'dist/crosslink-plotly.esm.min.js',
+      file: 'dist/crosslink-plotly.esm.js',
       format: 'es'
     }
   }
