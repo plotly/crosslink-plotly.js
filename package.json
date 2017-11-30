@@ -6,7 +6,7 @@
   "license": "MIT",
   "main": "dist/crosslink-plotly.min.js",
   "scripts": {
-    "make": "browserify src/index.js -t [ babelify --presets [ env ] ] | uglifyjs -m -c warnings=false > dist/crosslink-plotly.min.js",
+    "build": "browserify src/index.js -t [ babelify --presets [ env ] ] | uglifyjs -m -c warnings=false > dist/crosslink-plotly.min.js",
     "lint": "standard --fix",
     "test": "standard | snazzy"
   },
