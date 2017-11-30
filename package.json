@@ -5,7 +5,6 @@
   "repository": "https://github.com/plotly/crosslink-plotly.js",
   "license": "MIT",
   "main": "dist/crosslink-plotly.min.js",
-  "module": "dist/crosslink-plotly.esm.js",
   "scripts": {
     "build": "rollup -c",
     "lint": "standard --fix",
