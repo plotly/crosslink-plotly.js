@@ -13,3 +13,5 @@ npm-debug.log*
 !example/dist
 
 package-lock.json*
+
+lib
