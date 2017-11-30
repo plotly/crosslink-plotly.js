@@ -30,22 +30,6 @@ export default [
       commonjs(),
       buble({
         objectAssign: 'Object.assign'
-      }),
-    ],
-    output: {
-      file: 'es/index.js',
-      format: 'es'
-    }
-  },
-  {
-    input: 'src/index.js',
-    external: [],
-    name: 'crosslink-plotly.js',
-    plugins: [
-      nodeResolve(),
-      commonjs(),
-      buble({
-        objectAssign: 'Object.assign'
       })
     ],
     output: {
