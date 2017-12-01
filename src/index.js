@@ -336,6 +336,9 @@ export const cfPlotSetup = (Plotly, plotArray, gdPromise, plotEl, plotContent) =
     }
     gd.includedInCrossfilter = true;
 
+    if(crossfilter.plotDimensions && crossfilter.plotDimensions.length) {
+      crossfilter.plotDimensions.forEach(d => d.cfDimension.dispose())
+    }
     crossfilter.plotDimensions = getPlotArray(document)
       .filter(gd => gd.includedInCrossfilter)
       .map(gd => {
