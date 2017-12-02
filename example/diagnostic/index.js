@@ -15,31 +15,41 @@ const renderOneDiv = idArray => {
   return div
 }
 
+const histogram = true
+
 // render a root container
 renderOneDiv([])
 
 const renderedDivs = []
 
-plots.slice(1, 31).forEach((dataset, i) => {
+const offset = 1
+plots.slice(offset, 31).forEach((dataset, i) => {
   const plotEl = renderOneDiv([`wbcd_${i}`], true)
-  const data = [{
-    type: 'scatter',
-    mode: 'markers',
-    marker: {
-      size: 3,
-      opacity: 1,
-      color: plots[plots.length - 1].map(d => d === 'M' ? 1 : -1),
-      colorsrc: 'class'
-    },
-    x: dataset.map((d, i) => i),
-    xsrc: 'independent_' + i,
-    y: dataset,
-    ysrc: 'dependent_' + i
+  const data = histogram
+    ? [{
+      type: 'histogram',
+      x: dataset,
+      xsrc: 'dependent_' + i
+    }]
+    : [{
+      type: 'scatter',
+      mode: 'markers',
+      marker: {
+        size: 3,
+        opacity: 1,
+        color: plots[plots.length - 1].map(d => d === 'M' ? 1 : -1),
+        colorsrc: 'class'
+      },
+      x: dataset.map((d, i) => i),
+      xsrc: 'independent_' + i,
+      y: dataset,
+      ysrc: 'dependent_' + i
   }]
   const layout = Object.assign({}, {
-    width: 200,
-    height: 200,
-    margin: {t: 30, b: 20, l: 40, r: 10}
+    width: 330,
+    height: 175,
+    margin: {t: 30, b: 34, l: 40, r: 20},
+    xaxis: {title: set_names[offset + i]}
   }, cfLayoutOverrides)
   const plotContent = {data, layout}
   const crossfilterEnabled = cfEnabled(crossfiltering, plotContent);

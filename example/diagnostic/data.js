@@ -70,3 +70,38 @@ const all_sets = [
 
   ds_diagnosis
 ]
+
+const set_names = [
+  "Id",
+  "Radius (mean)",
+  "Texture (mean)",
+  "Perimeter (mean)",
+  "Area (mean)",
+  "Smoothness (mean)",
+  "Compactness (mean)",
+  "Concavity (mean)",
+  "Concave points (mean)",
+  "Symmetry (mean)",
+  "Fractal dimension (mean)",
+  "Radius (se)",
+  "Texture (se)",
+  "Perimeter (se)",
+  "Area (se)",
+  "Smoothness (se)",
+  "Compactness (se)",
+  "Concavity (se)",
+  "Concave points (se)",
+  "Symmetry (se)",
+  "Fractal dimension (se)",
+  "Radius (worst)",
+  "Texture (worst)",
+  "Perimeter (worst)",
+  "Area (worst)",
+  "Smoothness (worst)",
+  "Compactness (worst)",
+  "Concavity (worst)",
+  "Concave points (worst)",
+  "Symmetry (worst)",
+  "Fractal dimension (wrst)",
+  "Diagnosis"
+]
