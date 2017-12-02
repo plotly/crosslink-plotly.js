@@ -4990,6 +4990,60 @@ function crossfilter_capacity(w) {
 
 var crossfilter = crossfilter$2.crossfilter;
 
+/**
+ * inspired by is-number <https://github.com/jonschlinkert/is-number>
+ * but significantly simplified and sped up by ignoring number and string constructors
+ * ie these return false:
+ *   new Number(1)
+ *   new String('1')
+ */
+
+/**
+ * Is this string all whitespace?
+ * This solution kind of makes my brain hurt, but it's significantly faster
+ * than !str.trim() or any other solution I could find.
+ *
+ * whitespace codes from: http://en.wikipedia.org/wiki/Whitespace_character
+ * and verified with:
+ *
+ *  for(var i = 0; i < 65536; i++) {
+ *      var s = String.fromCharCode(i);
+ *      if(+s===0 && !s.trim()) console.log(i, s);
+ *  }
+ *
+ * which counts a couple of these as *not* whitespace, but finds nothing else
+ * that *is* whitespace. Note that charCodeAt stops at 16 bits, but it appears
+ * that there are no whitespace characters above this, and code points above
+ * this do not map onto white space characters.
+ */
+function allBlankCharCodes(str){
+    var l = str.length,
+        a;
+    for(var i = 0; i < l; i++) {
+        a = str.charCodeAt(i);
+        if((a < 9 || a > 13) && (a !== 32) && (a !== 133) && (a !== 160) &&
+            (a !== 5760) && (a !== 6158) && (a < 8192 || a > 8205) &&
+            (a !== 8232) && (a !== 8233) && (a !== 8239) && (a !== 8287) &&
+            (a !== 8288) && (a !== 12288) && (a !== 65279)) {
+                return false;
+        }
+    }
+    return true;
+}
+
+var fastIsnumeric = function(n) {
+    var type = typeof n;
+    if(type === 'string') {
+        var original = n;
+        n = +n;
+        // whitespace strings cast to zero - filter them out
+        if(n===0 && allBlankCharCodes(original)) { return false; }
+    }
+    else if(type !== 'number') { return false; }
+
+    return n - n < 1;
+};
+
 var cf = crossfilter;
 
 var CROSSFILTER_WHITELISTED_PLOTS = [
@@ -5210,9 +5264,9 @@ var restylePlots = function (Plotly, crossfilter$$1, plotArray) {
         }
         setDeepProp(trace, field.pathArray, value);
         var referenceMarker = ogd._fullData[i].marker || {};
-        var colorIsArray = Plotly.Lib.isArray(referenceMarker.color);
+        var colorIsArray = Array.isArray(referenceMarker.color);
         var directlyColored = !colorIsArray
-          || colorIsArray && !Plotly.Lib.isNumeric(referenceMarker.color[0]);
+          || colorIsArray && !fastIsnumeric(referenceMarker.color[0]);
         if (trace.type !== 'pie' && ogd._fullData[i].marker && directlyColored) {
           trace.marker = trace.marker || {};
           trace.marker.color = ogd._fullData[i].marker.color;
@@ -5322,6 +5376,9 @@ var cfPlotSetup = function (Plotly, plotArray, gdPromise, plotEl, plotContent) {
     }
     gd.includedInCrossfilter = true;
 
+    if(crossfilter$$1.plotDimensions && crossfilter$$1.plotDimensions.length) {
+      crossfilter$$1.plotDimensions.forEach(function (d) { return d.cfDimension.dispose(); });
+    }
     crossfilter$$1.plotDimensions = getPlotArray(document)
       .filter(function (gd) { return gd.includedInCrossfilter; })
       .map(function (gd) {

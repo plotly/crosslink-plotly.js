@@ -1,6 +1,7 @@
 import {map, clone, values, range, toPairs} from 'ramda';
 import {walkObject, makeAttrSetterPath} from './utils/objectUtils';
 import crossfilter from 'crossfilter';
+import isNumeric from 'fast-isnumeric';
 
 const cf = crossfilter;
 
@@ -223,9 +224,9 @@ const restylePlots = (Plotly, crossfilter, plotArray) => {
         }
         setDeepProp(trace, field.pathArray, value);
         const referenceMarker = ogd._fullData[i].marker || {};
-        const colorIsArray = Plotly.Lib.isArray(referenceMarker.color);
+        const colorIsArray = Array.isArray(referenceMarker.color);
         const directlyColored = !colorIsArray
-          || colorIsArray && !Plotly.Lib.isNumeric(referenceMarker.color[0]);
+          || colorIsArray && !isNumeric(referenceMarker.color[0]);
         if (trace.type !== 'pie' && ogd._fullData[i].marker && directlyColored) {
           trace.marker = trace.marker || {};
           trace.marker.color = ogd._fullData[i].marker.color;
@@ -335,6 +336,9 @@ export const cfPlotSetup = (Plotly, plotArray, gdPromise, plotEl, plotContent) =
     }
     gd.includedInCrossfilter = true;
 
+    if(crossfilter.plotDimensions && crossfilter.plotDimensions.length) {
+      crossfilter.plotDimensions.forEach(d => d.cfDimension.dispose())
+    }
     crossfilter.plotDimensions = getPlotArray(document)
       .filter(gd => gd.includedInCrossfilter)
       .map(gd => {
