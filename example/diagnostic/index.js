@@ -46,10 +46,11 @@ plots.slice(offset, 31).forEach((dataset, i) => {
       ysrc: 'dependent_' + i
   }]
   const layout = Object.assign({}, {
-    width: 330,
-    height: 175,
+    width: 250,
+    height: 150,
     margin: {t: 30, b: 34, l: 40, r: 20},
-    xaxis: {title: set_names[offset + i]}
+    title: histogram ? '' : set_names[offset + i],
+    xaxis: {title: (histogram ? set_names[offset + i] : '')}
   }, cfLayoutOverrides)
   const plotContent = {data, layout}
   const crossfilterEnabled = cfEnabled(crossfiltering, plotContent);
